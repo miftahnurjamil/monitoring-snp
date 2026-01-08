@@ -1,0 +1,16 @@
+{
+  "name": "monitoring-snp-app",
+  "description": "Aplikasi Monitoring Standar Nasional Pendidikan",
+  "require": {
+    "php": ">=7.4",
+    "tecnickcom/tcpdf": "^6.6"
+  },
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Developer",
+      "email": "developer@snp.com"
+    }
+  ]
+}

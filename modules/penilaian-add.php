@@ -7,15 +7,15 @@ $db = Database::getInstance();
 if (isPost()) {
     $kode_penilaian = generateKode('PNL');
     $sekolah_id = post('sekolah_id');
-    $pengawas_id = post('pengawas_id');
+    $penilik_id = post('penilik_id');
     $tahun_ajaran = post('tahun_ajaran');
     $semester = post('semester');
     $tanggal_penilaian = post('tanggal_penilaian');
     $selected_snp = post('snp_id');
     
     // Insert transaksi
-    $stmt = $db->prepare("INSERT INTO transaksi_penilaian (kode_penilaian, sekolah_id, pengawas_id, tahun_ajaran, semester, tanggal_penilaian, status, user_id) VALUES (?, ?, ?, ?, ?, ?, 'draft', ?)");
-    $stmt->bind_param("siiissi", $kode_penilaian, $sekolah_id, $pengawas_id, $tahun_ajaran, $semester, $tanggal_penilaian, $_SESSION['user_id']);
+    $stmt = $db->prepare("INSERT INTO transaksi_penilaian (kode_penilaian, sekolah_id, penilik_id, tahun_ajaran, semester, tanggal_penilaian, status, user_id) VALUES (?, ?, ?, ?, ?, ?, 'draft', ?)");
+    $stmt->bind_param("siiissi", $kode_penilaian, $sekolah_id, $penilik_id, $tahun_ajaran, $semester, $tanggal_penilaian, $_SESSION['user_id']);
     $stmt->execute();
     $transaksi_id = $db->lastInsertId();
     
@@ -25,7 +25,7 @@ if (isPost()) {
 
 // Get data for form
 $dataSekolah = $db->query("SELECT id, nama_sekolah FROM master_sekolah WHERE is_active = 1 ORDER BY nama_sekolah")->fetch_all(MYSQLI_ASSOC);
-$dataPengawas = $db->query("SELECT id, nama_lengkap FROM master_pengawas WHERE is_active = 1 ORDER BY nama_lengkap")->fetch_all(MYSQLI_ASSOC);
+$dataPenilik = $db->query("SELECT id, nama_lengkap FROM master_penilik WHERE is_active = 1 ORDER BY nama_lengkap")->fetch_all(MYSQLI_ASSOC);
 $dataSNP = $db->query("SELECT id, kode_snp, nama_snp FROM master_snp WHERE is_active = 1 ORDER BY urutan")->fetch_all(MYSQLI_ASSOC);
 
 $pageTitle = 'Input Penilaian SNP';
@@ -57,11 +57,11 @@ require_once '../includes/header.php';
                         </div>
                         
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Pengawas</label>
-                            <select class="form-select" name="pengawas_id">
-                                <option value="">-- Pilih Pengawas --</option>
-                                <?php foreach ($dataPengawas as $pengawas): ?>
-                                <option value="<?php echo $pengawas['id']; ?>"><?php echo $pengawas['nama_lengkap']; ?></option>
+                            <label class="form-label">Penilik</label>
+                            <select class="form-select" name="penilik_id">
+                                <option value="">-- Pilih Penilik --</option>
+                                <?php foreach ($dataPenilik as $penilik): ?>
+                                <option value="<?php echo $penilik['id']; ?>"><?php echo $penilik['nama_lengkap']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

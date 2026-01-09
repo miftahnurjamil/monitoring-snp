@@ -6,9 +6,9 @@ $db = Database::getInstance();
 // Handle Delete BEFORE any output
 if (isset($_GET['delete'])) {
     $id = (int)$_GET['delete'];
-    $db->query("DELETE FROM master_pengawas WHERE id = $id");
-    setFlash('success', 'Data pengawas berhasil dihapus!');
-    redirect('modules/master-pengawas.php');
+    $db->query("DELETE FROM master_penilik WHERE id = $id");
+    setFlash('success', 'Data penilik berhasil dihapus!');
+    redirect('modules/master-penilik.php');
 }
 
 // Handle Add/Edit BEFORE any output
@@ -25,32 +25,32 @@ if (isPost()) {
     
     if ($id) {
         // Update
-        $stmt = $db->prepare("UPDATE master_pengawas SET nip=?, nama_lengkap=?, pangkat_golongan=?, jabatan=?, wilayah_binaan=?, telepon=?, email=?, alamat=? WHERE id=?");
+        $stmt = $db->prepare("UPDATE master_penilik SET nip=?, nama_lengkap=?, pangkat_golongan=?, jabatan=?, wilayah_binaan=?, telepon=?, email=?, alamat=? WHERE id=?");
         $stmt->bind_param("ssssssssi", $nip, $nama_lengkap, $pangkat_golongan, $jabatan, $wilayah_binaan, $telepon, $email, $alamat, $id);
         $stmt->execute();
-        setFlash('success', 'Data pengawas berhasil diupdate!');
+        setFlash('success', 'Data penilik berhasil diupdate!');
     } else {
         // Insert
-        $stmt = $db->prepare("INSERT INTO master_pengawas (nip, nama_lengkap, pangkat_golongan, jabatan, wilayah_binaan, telepon, email, alamat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO master_penilik (nip, nama_lengkap, pangkat_golongan, jabatan, wilayah_binaan, telepon, email, alamat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssssss", $nip, $nama_lengkap, $pangkat_golongan, $jabatan, $wilayah_binaan, $telepon, $email, $alamat);
         $stmt->execute();
-        setFlash('success', 'Data pengawas berhasil ditambahkan!');
+        setFlash('success', 'Data penilik berhasil ditambahkan!');
     }
-    redirect('modules/master-pengawas.php');
+    redirect('modules/master-penilik.php');
 }
 
-$pageTitle = 'Master Pengawas';
+$pageTitle = 'Master Penilik';
 require_once '../includes/header.php';
 
 // Get data for edit
 $editData = null;
 if (isset($_GET['edit'])) {
     $id = (int)$_GET['edit'];
-    $editData = $db->query("SELECT * FROM master_pengawas WHERE id = $id")->fetch_assoc();
+    $editData = $db->query("SELECT * FROM master_penilik WHERE id = $id")->fetch_assoc();
 }
 
 // Get all data
-$dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DESC")->fetch_all(MYSQLI_ASSOC);
+$dataPenilik = $db->query("SELECT * FROM master_penilik ORDER BY created_at DESC")->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <div class="page-header">
@@ -63,7 +63,7 @@ $dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DE
             <div class="card-header bg-success text-white">
                 <h5 class="mb-0">
                     <i class="bi bi-<?php echo $editData ? 'pencil' : 'plus'; ?>-circle"></i>
-                    <?php echo $editData ? 'Edit' : 'Tambah'; ?> Pengawas
+                    <?php echo $editData ? 'Edit' : 'Tambah'; ?> Penilik
                 </h5>
             </div>
             <div class="card-body">
@@ -89,7 +89,7 @@ $dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DE
                     
                     <div class="mb-3">
                         <label class="form-label">Jabatan</label>
-                        <input type="text" class="form-control" name="jabatan" value="<?php echo $editData['jabatan'] ?? ''; ?>" placeholder="Contoh: Pengawas TK/PAUD">
+                        <input type="text" class="form-control" name="jabatan" value="<?php echo $editData['jabatan'] ?? ''; ?>" placeholder="Contoh: Penilik TK/PAUD">
                     </div>
                     
                     <div class="mb-3">
@@ -117,7 +117,7 @@ $dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DE
                             <i class="bi bi-save"></i> Simpan
                         </button>
                         <?php if ($editData): ?>
-                        <a href="<?php echo BASE_URL; ?>modules/master-pengawas.php" class="btn btn-secondary">
+                        <a href="<?php echo BASE_URL; ?>modules/master-penilik.php" class="btn btn-secondary">
                             <i class="bi bi-x-circle"></i> Batal
                         </a>
                         <?php endif; ?>
@@ -130,7 +130,7 @@ $dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DE
     <div class="col-md-8">
         <div class="card">
             <div class="card-header bg-white">
-                <h5 class="mb-0"><i class="bi bi-table"></i> Daftar Pengawas</h5>
+                <h5 class="mb-0"><i class="bi bi-table"></i> Daftar Penilik</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -147,7 +147,7 @@ $dataPengawas = $db->query("SELECT * FROM master_pengawas ORDER BY created_at DE
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1; foreach ($dataPengawas as $item): ?>
+                            <?php $no = 1; foreach ($dataPenilik as $item): ?>
                             <tr>
                                 <td><?php echo $no++; ?></td>
                                 <td><?php echo $item['nip']; ?></td>

@@ -8,9 +8,9 @@ Aplikasi web berbasis PHP untuk monitoring dan penilaian 8 Standar Nasional Pend
 
 - ✅ Master 8 SNP (Standar Nasional Pendidikan)
 - ✅ Master Sekolah (NPSN, Nama, Alamat, Kepala Sekolah, NIP)
-- ✅ Master Pengawas (NIP, Nama, Pangkat, Jabatan, Wilayah Binaan)
+- ✅ Master Penilik (NIP, Nama, Pangkat, Jabatan, Wilayah Binaan)
 - ✅ Master Pertanyaan/Indikator SNP
-- ✅ Manajemen User (Admin, Operator, Pengawas)
+- ✅ Manajemen User (Admin, Operator, Penilik)
 
 ### 2. **Transaksi Penilaian**
 
@@ -125,9 +125,9 @@ http://localhost/monitoring-snp/
 - Isi data: NPSN, Nama Sekolah, Alamat, Kepala Sekolah, NIP, dll
 - Klik **Simpan**
 
-#### 2. Master Pengawas
+#### 2. Master Penilik
 
-- Menu: **Data Master > Master Pengawas**
+- Menu: **Data Master > Master Penilik**
 - Isi data: NIP, Nama, Pangkat/Golongan, Jabatan, Wilayah Binaan
 - Klik **Simpan**
 
@@ -145,7 +145,7 @@ http://localhost/monitoring-snp/
 
 - Menu: **Transaksi > Input Penilaian Baru**
 - Pilih Sekolah
-- Pilih Pengawas (optional)
+- Pilih Penilik (optional)
 - Isi Tahun Ajaran, Semester, Tanggal
 - Pilih SNP yang akan dinilai
 - Klik **Lanjut ke Form Penilaian**
@@ -223,7 +223,7 @@ snp-app/
 │   └── footer.php              # Template footer
 ├── modules/
 │   ├── master-sekolah.php      # CRUD Master Sekolah
-│   ├── master-pengawas.php     # CRUD Master Pengawas
+│   ├── master-penilik.php     # CRUD Master Penilik
 │   ├── master-pertanyaan.php   # CRUD Master Pertanyaan
 │   ├── penilaian-add.php       # Form tambah penilaian
 │   ├── penilaian-form.php      # Form detail penilaian (skor)

@@ -39,9 +39,9 @@ Password: admin123
 2. Isi form: Nama, NPSN, Alamat, Kepala Sekolah, NIP
 3. Klik **Simpan**
 
-### Langkah 2: Tambah Data Pengawas (Optional)
+### Langkah 2: Tambah Data Penilik (Optional)
 
-1. Menu **Master Pengawas**
+1. Menu **Master Penilik**
 2. Isi form: NIP, Nama, Pangkat, Jabatan
 3. Klik **Simpan**
 
@@ -129,7 +129,7 @@ Penilaian    : http://localhost/monitoring-snp/modules/penilaian-add.php
 
 ## 🎓 Tips
 
-1. **Isi Master Data Dulu**: Sekolah → Pengawas → Pertanyaan SNP
+1. **Isi Master Data Dulu**: Sekolah → Penilik → Pertanyaan SNP
 2. **Gunakan Data Contoh**: Database sudah ada contoh data
 3. **Export PDF**: Gunakan tombol Print → Save as PDF jika tidak ada Composer
 4. **Backup Database**: Export via phpMyAdmin secara berkala

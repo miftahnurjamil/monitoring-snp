@@ -178,9 +178,9 @@
                 <span>Master Sekolah</span>
             </a>
             
-            <a href="<?php echo BASE_URL; ?>modules/master-pengawas.php" class="menu-item">
+            <a href="<?php echo BASE_URL; ?>modules/master-penilik.php" class="menu-item">
                 <i class="bi bi-person-badge"></i>
-                <span>Master Pengawas</span>
+                <span>Master Penilik</span>
             </a>
             
             <a href="<?php echo BASE_URL; ?>modules/master-pertanyaan.php" class="menu-item">

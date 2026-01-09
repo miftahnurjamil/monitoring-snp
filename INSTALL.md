@@ -124,7 +124,7 @@ Password: operator123
 
 Anda akan masuk ke **Dashboard** dengan tampilan:
 
-- 📊 **Statistik** (Total Sekolah, Pengawas, Penilaian)
+- 📊 **Statistik** (Total Sekolah, Penilik, Penilaian)
 - 📈 **Grafik** Penilaian
 - 📋 **8 SNP** (Standar Nasional Pendidikan)
 - 🕒 **Penilaian Terbaru**
@@ -150,16 +150,16 @@ Anda akan masuk ke **Dashboard** dengan tampilan:
 
 ---
 
-### 2️⃣ Tambah Data Pengawas (Optional)
+### 2️⃣ Tambah Data Penilik (Optional)
 
-**Menu:** Master Pengawas
+**Menu:** Master Penilik
 
-1. Klik sidebar **"Master Pengawas"**
+1. Klik sidebar **"Master Penilik"**
 2. Isi form:
    - NIP: `197506152006042012`
    - Nama: `Dr. Hj. Nengsih, M.Pd.`
    - Pangkat: `Pembina Tk.I / IV-b`
-   - Jabatan: `Pengawas TK/PAUD`
+   - Jabatan: `Penilik TK/PAUD`
    - Wilayah Binaan: `Kecamatan Tasikmalaya`
 3. Klik **"Simpan"**
 
@@ -194,7 +194,7 @@ Anda akan masuk ke **Dashboard** dengan tampilan:
 1. Klik sidebar **"Input Penilaian Baru"**
 2. Isi form:
    - **Sekolah:** Pilih sekolah
-   - **Pengawas:** Pilih pengawas (optional)
+   - **Penilik:** Pilih penilik (optional)
    - **Tahun Ajaran:** `2025/2026`
    - **Semester:** `1`
    - **Tanggal:** `2026-01-08` (hari ini)
@@ -250,7 +250,7 @@ Database sudah berisi:
 1. PAUD/TK Permata Bunda
 2. TK Harapan Bangsa
 
-### ✅ 2 Pengawas:
+### ✅ 2 Penilik:
 
 1. Dr. Hj. Nengsih, M.Pd.
 2. Dra. Euis Susilawati

@@ -29,10 +29,10 @@ $dataPenilaian = $db->query("
         t.tanggal_penilaian,
         t.status,
         s.nama_sekolah,
-        p.nama_lengkap as nama_pengawas
+        p.nama_lengkap as nama_penilik
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-    LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+    LEFT JOIN master_penilik p ON t.penilik_id = p.id
     ORDER BY t.created_at DESC
 ")->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -58,7 +58,7 @@ $dataPenilaian = $db->query("
                         <th>No</th>
                         <th>Kode Penilaian</th>
                         <th>Sekolah</th>
-                        <th>Pengawas</th>
+                        <th>Penilik</th>
                         <th>Tahun Ajaran</th>
                         <th>Semester</th>
                         <th>Tanggal</th>
@@ -82,7 +82,7 @@ $dataPenilaian = $db->query("
                             <span class="badge bg-secondary"><?php echo $item['kode_penilaian']; ?></span>
                         </td>
                         <td><strong><?php echo $item['nama_sekolah']; ?></strong></td>
-                        <td><?php echo $item['nama_pengawas'] ?? '-'; ?></td>
+                        <td><?php echo $item['nama_penilik'] ?? '-'; ?></td>
                         <td><?php echo $item['tahun_ajaran']; ?></td>
                         <td><?php echo $item['semester']; ?></td>
                         <td><?php echo formatTanggal($item['tanggal_penilaian']); ?></td>

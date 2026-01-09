@@ -14,11 +14,11 @@ if (!$transaksi_id || !$snp_id) {
 // Get transaksi data
 $transaksi = $db->query("
     SELECT t.*, s.nama_sekolah, s.nama_kepala_sekolah, s.nip_kepala_sekolah, s.alamat,
-           p.nama_lengkap as nama_pengawas,
+           p.nama_lengkap as nama_penilik,
            snp.kode_snp, snp.nama_snp
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-    LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+    LEFT JOIN master_penilik p ON t.penilik_id = p.id
     LEFT JOIN master_snp snp ON snp.id = $snp_id
     WHERE t.id = $transaksi_id
 ")->fetch_assoc();

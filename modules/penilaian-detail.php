@@ -13,10 +13,10 @@ if (!$kode) {
 $transaksi = $db->query("
     SELECT t.*, 
            s.nama_sekolah, s.nama_kepala_sekolah, s.nip_kepala_sekolah, s.alamat, s.kecamatan,
-           p.nama_lengkap as nama_pengawas, p.pangkat_golongan, p.jabatan
+           p.nama_lengkap as nama_penilik, p.pangkat_golongan, p.jabatan
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-    LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+    LEFT JOIN master_penilik p ON t.penilik_id = p.id
     WHERE t.kode_penilaian = '$kode'
 ")->fetch_assoc();
 

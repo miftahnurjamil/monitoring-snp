@@ -20,7 +20,7 @@
   - `users` - Manajemen user
   - `master_snp` - 8 SNP
   - `master_sekolah` - Data sekolah
-  - `master_pengawas` - Data pengawas
+  - `master_penilik` - Data penilik
   - `aspek_snp` - Aspek/sub indikator
   - `pertanyaan_snp` - Pertanyaan penilaian
   - `sub_pertanyaan` - Sub-item pertanyaan
@@ -34,14 +34,14 @@
 - **Login Page** (`login.php`)
 - **Logout** (`logout.php`)
 - **Auth Middleware** (`includes/auth.php`)
-- **Role-based Access** (Admin, Operator, Pengawas)
+- **Role-based Access** (Admin, Operator, Penilik)
 - **Session Management** (timeout 1 jam)
 
 ### ✅ 3. Dashboard
 
 - **File:** `dashboard.php`
 - **Fitur:**
-  - Statistik (Sekolah, Pengawas, Penilaian, SNP)
+  - Statistik (Sekolah, Penilik, Penilaian, SNP)
   - Grafik penilaian 6 bulan terakhir (Chart.js)
   - List 8 SNP
   - Tabel penilaian terbaru
@@ -62,9 +62,9 @@
 - Data Kepala Sekolah & NIP
 - DataTables untuk search & sort
 
-#### c. Master Pengawas (`modules/master-pengawas.php`)
+#### c. Master Penilik (`modules/master-penilik.php`)
 
-- CRUD data pengawas
+- CRUD data penilik
 - Field: NIP, Nama, Pangkat/Golongan, Jabatan, Wilayah Binaan
 - Contact info (telepon, email)
 
@@ -82,7 +82,7 @@
 #### a. Input Penilaian (`modules/penilaian-add.php`)
 
 - Form wizard untuk buat penilaian baru
-- Pilih: Sekolah, Pengawas, Tahun Ajaran, Semester, SNP
+- Pilih: Sekolah, Penilik, Tahun Ajaran, Semester, SNP
 - Generate kode penilaian otomatis
 
 #### b. Form Penilaian Detail (`modules/penilaian-form.php`)
@@ -124,7 +124,7 @@
 - Data sekolah & info penilaian
 - Tabel rekapitulasi per SNP
 - Keterangan kategori nilai
-- Tanda tangan Kepala Sekolah & Pengawas
+- Tanda tangan Kepala Sekolah & Penilik
 - Fallback ke HTML to PDF (tanpa Composer)
 - Support TCPDF (dengan Composer)
 
@@ -205,7 +205,7 @@ Nilai = (Perolehan / Maksimal) × 100
 1. PAUD/TK Permata Bunda (NPSN: 69962561)
 2. TK Harapan Bangsa (NPSN: 69962562)
 
-### ✅ 2 Pengawas:
+### ✅ 2 Penilik:
 
 1. Dr. Hj. Nengsih, M.Pd.
 2. Dra. Euis Susilawati
@@ -234,7 +234,7 @@ Nilai = (Perolehan / Maksimal) × 100
 
 - master-snp.php
 - master-sekolah.php
-- master-pengawas.php
+- master-penilik.php
 - master-pertanyaan.php
 - penilaian-add.php
 - penilaian-form.php
@@ -288,7 +288,7 @@ Password: admin123
 
 1. ✅ **Sesuai Permintaan User:**
 
-   - Data master lengkap (Sekolah, Pengawas, 8 SNP)
+   - Data master lengkap (Sekolah, Penilik, 8 SNP)
    - Form penilaian dengan skor 0-4
    - Export laporan PDF seperti contoh gambar
 
@@ -335,7 +335,7 @@ Password: admin123
 
 - ✅ Monitoring SNP di sekolah TK/PAUD
 - ✅ Evaluasi standar pendidikan
-- ✅ Laporan pengawas sekolah
+- ✅ Laporan penilik sekolah
 - ✅ Dokumentasi penilaian berkala
 - ✅ Analisis kualitas pendidikan
 
@@ -360,7 +360,7 @@ Password: admin123
 
 Semua fitur yang diminta telah diimplementasi:
 
-1. ✅ **Data Master** (8 SNP, Sekolah, Pengawas, Pengelolaan)
+1. ✅ **Data Master** (8 SNP, Sekolah, Penilik, Pengelolaan)
 2. ✅ **Transaksi Penilaian** (Form dengan skor 0-4, support sub-indikator)
 3. ✅ **Laporan PDF** (Print-friendly, professional layout)
 

@@ -17,7 +17,7 @@ snp-app/
 ├── 📁 modules/                     # Modul Aplikasi
 │   ├── master-snp.php              # CRUD 8 SNP
 │   ├── master-sekolah.php          # CRUD Master Sekolah
-│   ├── master-pengawas.php         # CRUD Master Pengawas
+│   ├── master-penilik.php         # CRUD Master Penilik
 │   ├── master-pertanyaan.php       # CRUD Pertanyaan/Indikator SNP
 │   ├── penilaian-add.php           # Form create penilaian baru
 │   ├── penilaian-form.php          # Form input skor penilaian
@@ -43,10 +43,10 @@ snp-app/
 
 ### Tabel Master
 
-- `users` - User aplikasi (admin, operator, pengawas)
+- `users` - User aplikasi (admin, operator, penilik)
 - `master_snp` - 8 Standar Nasional Pendidikan
 - `master_sekolah` - Data sekolah (NPSN, nama, kepala sekolah, dll)
-- `master_pengawas` - Data pengawas sekolah
+- `master_penilik` - Data penilik sekolah
 - `aspek_snp` - Aspek/sub indikator setiap SNP
 - `pertanyaan_snp` - Pertanyaan/indikator untuk penilaian
 - `sub_pertanyaan` - Sub-item dari pertanyaan
@@ -62,7 +62,7 @@ snp-app/
 ### 1. Persiapan Data Master
 
 ```
-Login → Master Sekolah → Master Pengawas → Master Pertanyaan SNP
+Login → Master Sekolah → Master Penilik → Master Pertanyaan SNP
 ```
 
 ### 2. Input Penilaian
@@ -70,7 +70,7 @@ Login → Master Sekolah → Master Pengawas → Master Pertanyaan SNP
 ```
 Input Penilaian Baru
   ↓
-Pilih Sekolah, Pengawas, Tahun Ajaran, SNP
+Pilih Sekolah, Penilik, Tahun Ajaran, SNP
   ↓
 Form Penilaian (Isi Skor 0-4)
   ↓
@@ -123,7 +123,7 @@ Data Penilaian → Detail → Export PDF / Print
 ✅ Input & lihat penilaian
 ✅ Export laporan
 
-### Pengawas (untuk development)
+### Penilik (untuk development)
 
 👁️ Lihat penilaian saja
 📄 Export laporan saja
@@ -161,7 +161,7 @@ Kategori = B (Baik)
 
 ### Dashboard
 
-- Statistik total sekolah, pengawas, penilaian
+- Statistik total sekolah, penilik, penilaian
 - Grafik penilaian 6 bulan terakhir
 - List 8 SNP
 - Penilaian terbaru
@@ -172,9 +172,9 @@ Kategori = B (Baik)
 - Data: NPSN, nama, alamat, kepala sekolah, NIP
 - DataTables untuk pencarian & sorting
 
-### Master Pengawas
+### Master Penilik
 
-- CRUD pengawas
+- CRUD penilik
 - Data: NIP, nama, pangkat, jabatan, wilayah binaan
 
 ### Master Pertanyaan
@@ -207,7 +207,7 @@ Kategori = B (Baik)
 /dashboard.php              → Dashboard
 /modules/master-snp.php     → Master SNP
 /modules/master-sekolah.php → Master Sekolah
-/modules/master-pengawas.php → Master Pengawas
+/modules/master-penilik.php → Master Penilik
 /modules/master-pertanyaan.php?snp=1 → Master Pertanyaan
 /modules/penilaian-add.php  → Form create penilaian
 /modules/penilaian-form.php?id=1&snp=1 → Form input skor
@@ -221,7 +221,7 @@ Kategori = B (Baik)
 
 1. **BASE_URL** harus disesuaikan di `config/config.php`
 2. Database otomatis dibuat saat import `database_snp.sql`
-3. Data contoh sudah tersedia (2 sekolah, 2 pengawas, 8 SNP)
+3. Data contoh sudah tersedia (2 sekolah, 2 penilik, 8 SNP)
 4. Password user di-hash dengan MD5 (untuk production gunakan password_hash)
 5. Session timeout: 1 jam (bisa diubah di config)
 6. Upload max: 5MB (bisa diubah di config)

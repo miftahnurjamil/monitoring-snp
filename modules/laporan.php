@@ -37,12 +37,12 @@ $laporan = $db->query("
         t.status,
         s.nama_sekolah,
         s.jenis_sekolah,
-        p.nama_lengkap as nama_pengawas,
+        p.nama_lengkap as nama_penilik,
         (SELECT SUM(total_skor_perolehan) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as total_perolehan,
         (SELECT SUM(total_skor_maksimal) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as total_maksimal
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-    LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+    LEFT JOIN master_penilik p ON t.penilik_id = p.id
     $whereClause
     ORDER BY t.tanggal_penilaian DESC
 ")->fetch_all(MYSQLI_ASSOC);
@@ -173,7 +173,7 @@ require_once '../includes/header.php';
                         <th width="12%">Kode Penilaian</th>
                         <th width="20%">Sekolah</th>
                         <th width="10%">Jenis</th>
-                        <th width="12%">Pengawas</th>
+                        <th width="12%">Penilik</th>
                         <th width="10%">Tahun Ajaran</th>
                         <th width="10%">Tanggal</th>
                         <th width="8%">Nilai</th>
@@ -209,7 +209,7 @@ require_once '../includes/header.php';
                         <td><strong><?php echo $row['kode_penilaian']; ?></strong></td>
                         <td><?php echo $row['nama_sekolah']; ?></td>
                         <td><?php echo $row['jenis_sekolah']; ?></td>
-                        <td><?php echo $row['nama_pengawas']; ?></td>
+                        <td><?php echo $row['nama_penilik']; ?></td>
                         <td><?php echo $row['tahun_ajaran']; ?></td>
                         <td><?php echo formatTanggal($row['tanggal_penilaian']); ?></td>
                         <td>

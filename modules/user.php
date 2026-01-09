@@ -156,7 +156,7 @@ $users = $db->query("SELECT * FROM users ORDER BY created_at DESC")->fetch_all(M
                         <label class="form-label">Role <span class="text-danger">*</span></label>
                         <select class="form-select" name="role" required>
                             <option value="admin" <?php echo (isset($editData) && $editData['role'] == 'admin') ? 'selected' : ''; ?>>Admin</option>
-                            <option value="pengawas" <?php echo (isset($editData) && $editData['role'] == 'pengawas') ? 'selected' : ''; ?>>Pengawas</option>
+                            <option value="penilik" <?php echo (isset($editData) && $editData['role'] == 'penilik') ? 'selected' : ''; ?>>Penilik</option>
                             <option value="operator" <?php echo (isset($editData) && $editData['role'] == 'operator') ? 'selected' : ''; ?>>Operator</option>
                         </select>
                     </div>
@@ -226,8 +226,8 @@ $users = $db->query("SELECT * FROM users ORDER BY created_at DESC")->fetch_all(M
                                         case 'admin':
                                             $roleBadge = '<span class="badge bg-danger">Admin</span>';
                                             break;
-                                        case 'pengawas':
-                                            $roleBadge = '<span class="badge bg-primary">Pengawas</span>';
+                                        case 'penilik':
+                                            $roleBadge = '<span class="badge bg-primary">Penilik</span>';
                                             break;
                                         case 'operator':
                                             $roleBadge = '<span class="badge bg-secondary">Operator</span>';

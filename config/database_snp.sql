@@ -18,7 +18,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     nama_lengkap VARCHAR(100) NOT NULL,
     email VARCHAR(100),
-    role ENUM('admin', 'pengawas', 'operator') DEFAULT 'operator',
+    role ENUM('admin', 'penilik', 'operator') DEFAULT 'operator',
     is_active TINYINT(1) DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -61,9 +61,9 @@ CREATE TABLE master_sekolah (
 );
 
 -- =====================================================
--- TABEL MASTER PENGAWAS
+-- TABEL MASTER PENILIK
 -- =====================================================
-CREATE TABLE master_pengawas (
+CREATE TABLE master_penilik (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nip VARCHAR(25) UNIQUE NOT NULL,
     nama_lengkap VARCHAR(100) NOT NULL,
@@ -129,7 +129,7 @@ CREATE TABLE transaksi_penilaian (
     id INT PRIMARY KEY AUTO_INCREMENT,
     kode_penilaian VARCHAR(50) UNIQUE NOT NULL,
     sekolah_id INT NOT NULL,
-    pengawas_id INT,
+    penilik_id INT,
     tahun_ajaran VARCHAR(20) NOT NULL,
     semester ENUM('1', '2') DEFAULT '1',
     tanggal_penilaian DATE NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE transaksi_penilaian (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (sekolah_id) REFERENCES master_sekolah(id),
-    FOREIGN KEY (pengawas_id) REFERENCES master_pengawas(id),
+    FOREIGN KEY (penilik_id) REFERENCES master_penilik(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -204,10 +204,10 @@ INSERT INTO master_sekolah (npsn, nama_sekolah, jenis_sekolah, alamat, kecamatan
 ('69962561', 'PAUD/TK Permata Bunda', 'TK', 'Jl. Otista No. 12 Tasikmalaya', 'Tasikmalaya', 'Mimin Suminar, S.Pd.', '19820408 202002 2 001'),
 ('69962562', 'TK Harapan Bangsa', 'TK', 'Jl. Merdeka No. 45 Tasikmalaya', 'Indihiang', 'Siti Nurjanah, S.Pd.', '19850512 200801 2 003');
 
--- Insert Contoh Pengawas
-INSERT INTO master_pengawas (nip, nama_lengkap, pangkat_golongan, jabatan, wilayah_binaan) VALUES
-('197506152006042012', 'Dr. Hj. Nengsih, M.Pd.', 'Pembina Tk.I / IV-b', 'Pengawas TK/PAUD', 'Kecamatan Tasikmalaya'),
-('198201102008012015', 'Dra. Euis Susilawati', 'Pembina / IV-a', 'Pengawas TK/PAUD', 'Kecamatan Indihiang');
+-- Insert Contoh Penilik
+INSERT INTO master_penilik (nip, nama_lengkap, pangkat_golongan, jabatan, wilayah_binaan) VALUES
+('197506152006042012', 'Dr. Hj. Nengsih, M.Pd.', 'Pembina Tk.I / IV-b', 'Penilik TK/PAUD', 'Kecamatan Tasikmalaya'),
+('198201102008012015', 'Dra. Euis Susilawati', 'Pembina / IV-a', 'Penilik TK/PAUD', 'Kecamatan Indihiang');
 
 -- Insert Contoh Aspek untuk SNP-01 (Standar Pencapaian Perkembangan Anak)
 INSERT INTO aspek_snp (snp_id, kode_aspek, nama_aspek, urutan) VALUES
@@ -238,7 +238,7 @@ INSERT INTO sub_pertanyaan (pertanyaan_id, kode_sub, sub_pertanyaan, urutan) VAL
 -- INDEXES untuk Performa
 -- =====================================================
 CREATE INDEX idx_sekolah_npsn ON master_sekolah(npsn);
-CREATE INDEX idx_pengawas_nip ON master_pengawas(nip);
+CREATE INDEX idx_penilik_nip ON master_penilik(nip);
 CREATE INDEX idx_transaksi_kode ON transaksi_penilaian(kode_penilaian);
 CREATE INDEX idx_transaksi_sekolah ON transaksi_penilaian(sekolah_id);
 CREATE INDEX idx_detail_transaksi ON detail_penilaian(transaksi_id);
@@ -254,7 +254,7 @@ SELECT
     s.nama_sekolah,
     s.nama_kepala_sekolah,
     s.nip_kepala_sekolah,
-    p.nama_lengkap as nama_pengawas,
+    p.nama_lengkap as nama_penilik,
     t.tahun_ajaran,
     t.semester,
     t.tanggal_penilaian,
@@ -266,7 +266,7 @@ SELECT
     r.kategori
 FROM transaksi_penilaian t
 LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+LEFT JOIN master_penilik p ON t.penilik_id = p.id
 LEFT JOIN rekapitulasi_snp r ON t.id = r.transaksi_id
 LEFT JOIN master_snp snp ON r.snp_id = snp.id;
 

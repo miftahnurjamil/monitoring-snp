@@ -12,10 +12,10 @@ if (!$kode) {
 $transaksi = $db->query("
     SELECT t.*, 
            s.nama_sekolah, s.nama_kepala_sekolah, s.nip_kepala_sekolah, s.alamat, s.kecamatan,
-           p.nama_lengkap as nama_pengawas, p.pangkat_golongan, p.jabatan
+           p.nama_lengkap as nama_penilik, p.pangkat_golongan, p.jabatan
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
-    LEFT JOIN master_pengawas p ON t.pengawas_id = p.id
+    LEFT JOIN master_penilik p ON t.penilik_id = p.id
     WHERE t.kode_penilaian = '$kode'
 ")->fetch_assoc();
 
@@ -273,9 +273,9 @@ $kategori_akhir = getKategoriNilai($nilai_akhir);
                 <td width="50%" class="text-center">
                     <div class="signature">
                         <p><?php echo $transaksi['kecamatan']; ?>, <?php echo formatTanggal(date('Y-m-d')); ?></p>
-                        <p>Pengawas,</p>
+                        <p>Penilik,</p>
                         <br><br><br>
-                        <p><strong><?php echo $transaksi['nama_pengawas'] ?? '............................'; ?></strong></p>
+                        <p><strong><?php echo $transaksi['nama_penilik'] ?? '............................'; ?></strong></p>
                     </div>
                 </td>
             </tr>

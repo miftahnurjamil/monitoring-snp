@@ -7,7 +7,7 @@ $db = Database::getInstance();
 
 // Statistik
 $totalSekolah = $db->query("SELECT COUNT(*) as total FROM master_sekolah WHERE is_active = 1")->fetch_assoc()['total'];
-$totalPengawas = $db->query("SELECT COUNT(*) as total FROM master_pengawas WHERE is_active = 1")->fetch_assoc()['total'];
+$totalPenilik = $db->query("SELECT COUNT(*) as total FROM master_penilik WHERE is_active = 1")->fetch_assoc()['total'];
 $totalPenilaian = $db->query("SELECT COUNT(*) as total FROM transaksi_penilaian")->fetch_assoc()['total'];
 $totalSNP = $db->query("SELECT COUNT(*) as total FROM master_snp WHERE is_active = 1")->fetch_assoc()['total'];
 
@@ -68,8 +68,8 @@ $jumlahData = json_encode(array_column($chartData, 'jumlah'));
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
-                        <h6 class="text-muted mb-2">Total Pengawas</h6>
-                        <h2 class="mb-0"><?php echo $totalPengawas; ?></h2>
+                        <h6 class="text-muted mb-2">Total Penilik</h6>
+                        <h2 class="mb-0"><?php echo $totalPenilik; ?></h2>
                     </div>
                     <div class="icon text-success">
                         <i class="bi bi-person-badge"></i>

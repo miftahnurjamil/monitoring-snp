@@ -39,7 +39,8 @@ $laporan = $db->query("
         s.jenis_sekolah,
         p.nama_lengkap as nama_penilik,
         (SELECT SUM(total_skor_perolehan) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as total_perolehan,
-        (SELECT SUM(total_skor_maksimal) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as total_maksimal
+        (SELECT SUM(total_skor_maksimal) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as total_maksimal,
+        (SELECT COUNT(DISTINCT snp_id) FROM rekapitulasi_snp WHERE transaksi_id = t.id) as snp_dinilai
     FROM transaksi_penilaian t
     LEFT JOIN master_sekolah s ON t.sekolah_id = s.id
     LEFT JOIN master_penilik p ON t.penilik_id = p.id
@@ -171,11 +172,12 @@ require_once '../includes/header.php';
                     <tr>
                         <th width="5%">No</th>
                         <th width="12%">Kode Penilaian</th>
-                        <th width="20%">Sekolah</th>
-                        <th width="10%">Jenis</th>
+                        <th width="18%">Sekolah</th>
+                        <th width="8%">Jenis</th>
                         <th width="12%">Penilik</th>
                         <th width="10%">Tahun Ajaran</th>
-                        <th width="10%">Tanggal</th>
+                        <th width="9%">Tanggal</th>
+                        <th width="8%">Progress SNP</th>
                         <th width="8%">Nilai</th>
                         <th width="8%">Status</th>
                         <th width="5%">Aksi</th>
@@ -190,6 +192,11 @@ require_once '../includes/header.php';
                             $nilai = round(($row['total_perolehan'] / $row['total_maksimal']) * 100, 2);
                         }
                         $kategori = getKategoriNilai($nilai);
+                        
+                        // Progress SNP
+                        $snp_dinilai = (int)$row['snp_dinilai'];
+                        $total_snp = 8;
+                        $progress_lengkap = ($snp_dinilai >= $total_snp);
                         
                         // Status badge
                         $statusBadge = '';
@@ -206,12 +213,36 @@ require_once '../includes/header.php';
                     ?>
                     <tr>
                         <td><?php echo $no++; ?></td>
-                        <td><strong><?php echo $row['kode_penilaian']; ?></strong></td>
+                        <td>
+                            <strong><?php echo $row['kode_penilaian']; ?></strong>
+                            <?php if (!$progress_lengkap): ?>
+                            <br><span class="badge bg-danger" style="font-size: 0.7rem;">
+                                <i class="bi bi-exclamation-triangle"></i> Belum Lengkap
+                            </span>
+                            <?php endif; ?>
+                        </td>
                         <td><?php echo $row['nama_sekolah']; ?></td>
                         <td><?php echo $row['jenis_sekolah']; ?></td>
                         <td><?php echo $row['nama_penilik']; ?></td>
                         <td><?php echo $row['tahun_ajaran']; ?></td>
                         <td><?php echo formatTanggal($row['tanggal_penilaian']); ?></td>
+                        <td>
+                            <div class="text-center">
+                                <strong class="<?php echo $progress_lengkap ? 'text-success' : 'text-danger'; ?>">
+                                    <?php echo $snp_dinilai; ?> / <?php echo $total_snp; ?>
+                                </strong>
+                                <br>
+                                <?php if ($progress_lengkap): ?>
+                                    <span class="badge bg-success" style="font-size: 0.7rem;">
+                                        <i class="bi bi-check-circle"></i> Lengkap
+                                    </span>
+                                <?php else: ?>
+                                    <span class="badge bg-warning text-dark" style="font-size: 0.7rem;">
+                                        <?php echo ($total_snp - $snp_dinilai); ?> lagi
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </td>
                         <td>
                             <strong class="<?php echo $nilai >= 86 ? 'text-success' : ($nilai >= 71 ? 'text-warning' : 'text-danger'); ?>">
                                 <?php echo number_format($nilai, 2); ?>
